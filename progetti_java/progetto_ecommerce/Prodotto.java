@@ -3,7 +3,6 @@ package progetti_java.progetto_ecommerce;
 public class Prodotto {
 	protected String titoloArticolo;
 	protected float prezzo;
-	// protected float prezzoScontato;
 	protected String marca;
 	protected boolean isBought;
 	protected String codiceUnivoco;
@@ -21,9 +20,4 @@ public class Prodotto {
 		this.isBought = false;
 		this.amount = 1;
 	}
-
-	/* Note:
-		Sarebbe figo se si potesse creare che quando viene aggiunto dentro il carrello in modo casuale sceglie uno sconto
-		(così poi da modificare il prezzo).
-	 */
 }

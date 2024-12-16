@@ -19,7 +19,7 @@ public final class ListaOperazioni {
 				System.out.println("┌: ["+ i +"]: " + prodottoCorrente.titoloArticolo + ":");
 				System.out.format("├─  Prezzo: %.2f euro\n", prodottoCorrente.prezzo);
 
-				if(!"".equals(prodottoCorrente.marca)){ // Note: Uguale a dire: prodottoCorrente.marca != "" ma java rompe il cazzo.
+				if(!"".equals(prodottoCorrente.marca)){ // Note: Uguale a dire: prodottoCorrente.marca != "" ma Java manda un avvertimento per cambiarlo come scritto nell'argomento del costrutto "if".
 				// Inoltre equals compara due oggetti, ma visto che le stringhe in java sono oggetti posso
 				// tranquillamente comparare due stringhe usando questa funzione.
 					System.out.println("├─  Marca: " + prodottoCorrente.marca);
@@ -37,9 +37,9 @@ public final class ListaOperazioni {
 				if(prodottoCorrente.isBought){
 					System.out.println("├─  L'oggetto è stato già comprato in passato");}
 
-				// Solo per oggetti di classe 'Aliemento' --> Cibi.
+				// Solo per oggetti di classe 'Aliemento'.
 				if(prodottoCorrente instanceof Alimento alimentoCorrente){
-					// Note: Uguale a dire (dentro il corpo dell'if statement) senza la variabile 'alimentoCorrente' dentro la condizione: 'Alimento alimentoCorrente = (Alimento) prodottoCorrente;'
+					// Note: Uguale a dire, dentro il corpo dell'if statement, senza l'oggetto 'alimentoCorrente' presente nella condizione del costrutto if: 'Alimento alimentoCorrente = (Alimento) prodottoCorrente;'
 					if(alimentoCorrente.IsSolido()){specBoolString = "solido";}else{specBoolString = "morbido";}
 					System.out.print("├─  L'alimento è " + specBoolString + " e ");
 
@@ -49,7 +49,7 @@ public final class ListaOperazioni {
 					System.out.println("├─  Peso: " + alimentoCorrente.getPeso() + "\n├─  Scadenza: " + alimentoCorrente.getScadenza());
 				}
 
-				// Solo per oggetti di classe 'Elettronica' --> Oggetti elettronici.
+				// Solo per oggetti di classe 'Elettronica'.
 				if(prodottoCorrente instanceof Elettronica elettronicaCorrente){
 					System.out.println("├─  Consumo: " + elettronicaCorrente.getConsumo());
 
@@ -57,7 +57,7 @@ public final class ListaOperazioni {
 					System.out.println("├─  Il prodotto " + specBoolString );
 				}
 
-				// Solo per oggetti di classe 'Abbigliamento' --> Abiti.
+				// Solo per oggetti di classe 'Abbigliamento'.
 				if(prodottoCorrente instanceof Abbigliamento abbigliamentoCorrente){
 					System.out.println("├─  Taglia: " + abbigliamentoCorrente.getTaglia() + "\n├─  Colore: " + abbigliamentoCorrente.getColoreCapo());
 
@@ -76,7 +76,7 @@ public final class ListaOperazioni {
 		}
 	}
 
-	// L'elemento aggiunto viene messo prima dell'index indicato --> list.add(pos, elementNuovo): --> elementNuovo prima di element.get(pos)
+	// L'elemento aggiunto viene posizionato prima dell'index indicato -- Quindi -> list.add(pos, elementNuovo) -- Indica -> 'elementNuovo' aggiunto prima di element.get(pos)
 	public static void swapItemsInList(int indexElement1, int indexElement2, List<Prodotto> lista){
 		indexElement1 -= 1;
 		indexElement2 -= 1;
@@ -115,7 +115,7 @@ public final class ListaOperazioni {
 		if(!lista.contains(oggetto)){
 			lista.add(oggetto);
 		}else{
-			// lista.get(lista.indexOf(oggetto)).amount++;
+			// lista.get(lista.indexOf(oggetto)).amount++; --> Altro modo.
 			oggetto.amount++;
 		}
 	}

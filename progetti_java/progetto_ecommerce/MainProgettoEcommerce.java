@@ -22,19 +22,13 @@ public class MainProgettoEcommerce {
 		List<Prodotto> listaProdottiAcq = new ArrayList<>();
 
 		/*
-			Non ha senso instanziare negozio --> Non è un oggetto fisico che ha metodi senza parametri,
-			ha solo lo scopo di mantenere tutte le funzioni delle liste in un unico posto.
-			Codice prima della modifica della classe 'ListaOperazioni' in 'final':
-				Creazione dell'oggetto 'negozio' di classe 'Negozio' il quale contiene le funzioni chiave per il controllo dell'ecommerce.
-				Negozio negozio = new Negozio(listaDesideri, carrello);
+		 * Non ha senso instanziare Negozio (Nome della classe prima di essere cambiato in ListaOperazioni),
+		 * perchè non è un oggetto fisico che ha metodi privi di parametri i quali modificano attributi della classe,
+		 * ha solo lo scopo di mantenere tutte i metodi che modificano le liste in un unico luogo.
+		 * Il codice che segue è prima della modifica della classe 'ListaOperazioni' (ex Negozio) in 'final':
+		 *	 Creazione dell'oggetto 'negozio' di classe 'Negozio' il quale contiene le funzioni chiave per il controllo dell'ecommerce.
+		 *	 Negozio negozio = new Negozio(listaDesideri, carrello);
 		*/
-
-		// Debug: TEST
-		carrello.add(new Prodotto("tit1", 1, "", "1", 0, ""));
-		carrello.add(new Prodotto("tit2", 2, "", "2", 0, ""));
-		carrello.add(new Prodotto("tit3", 3, "", "3", 0, ""));
-		carrello.add(new Prodotto("tit4", 4, "", "4", 0, ""));
-		carrello.add(new Prodotto("tit5", 5, "", "5", 0, ""));
 
 		// Elettronica:
 		ecommerce.add(new Elettronica("iPhone 16", 979, "Apple", "1", 0, "1 anno", 'a', true));
@@ -53,7 +47,7 @@ public class MainProgettoEcommerce {
 		ecommerce.add(new Abbigliamento("Jordan 4", 530, "Jordan", "10", 0, "", "46", "", "verde"));
 		ecommerce.add(new Abbigliamento("Pantaloni Nike", 90, "Nike", "11", 0, "", "XS", "tech", "nero"));
 
-		// Attributi in comune:
+		// Attributi in comune (aggiunti per la creazione di nuovi oggetti dall'utente):
 		float prezzoProdotto;
 		String titoloProdotto, marcaProdotto, codiceUnivocoProdotto, garanziaProdotto;
 		// Attributi di 'Elettronica':
@@ -134,7 +128,6 @@ public class MainProgettoEcommerce {
 
 						// Riordina le liste:
 						case 3 ->{
-							// System.out.println("Riordina liste:\n  1. Carrello\n  2. Lista dei desideri  \n  3. Indietro");
 							System.out.println("Riordina liste:");
 							if(carrello.isEmpty()){System.out.print("  1. Carrello (Vuoto!)\n  ");}else{System.out.print("  1. Carrello\n");}
 							if(listaDesideri.isEmpty()){System.out.print("  2. Lista dei desideri (Vuoto!)\n");}else{System.out.print("  2. Lista dei desideri\n");}
@@ -251,6 +244,9 @@ public class MainProgettoEcommerce {
 										System.out.print("\033[H\033[2J");
 										System.out.flush();
 
+										/* Scambio dei prodotti da:
+										 * carrello --> listaProdottiAcq
+										*/
 										for(Prodotto prodottoCorrente: carrello){
 											listaProdottiAcq.add(prodottoCorrente);
 										}
@@ -382,14 +378,14 @@ public class MainProgettoEcommerce {
 
 					switch(selezione){
 						case 1 ->{
-							// New Prodotto di Elettronica.
+							// Nuovo Prodotto di Elettronica.
 							System.out.println("Consumo del prodotto:");
 							testoInput = readInputString("> ");
 							consumoElettronica = testoInput.charAt(0);
 
-							// Non è conforme al resto del codice dove si immette solo valori numeri in input
+							// Non è conforme al resto del codice dove si immette solo valori numerici in input
 							// (eccetto le stringhe per la creazione di nuovi oggetti) perchè faccio digitare
-							// all'utente 'si' oppure 'no' per scegliere le opzioni date:
+							// all'utente 'si' oppure 'no' per scegliere l'opzione data:
 							do {
 								System.out.println("Batteria (si/no):");
 								testoInput = readInputString("> ");
@@ -404,7 +400,7 @@ public class MainProgettoEcommerce {
 							System.out.println("Prodotto aggiunto con successo!");
 						}
 						case 2 ->{
-							// New Prodotto di Alimento.
+							// Nuovo Prodotto di Alimento.
 							do {
 								System.out.println("Solido (si/no):");
 								testoInput = readInputString("> ");
@@ -433,7 +429,7 @@ public class MainProgettoEcommerce {
 							System.out.println("Prodotto aggiunto con successo!");
 						}
 						case 3 ->{
-							// New Prodotto di Abbigliamento.
+							// Nuovo Prodotto di Abbigliamento.
 							System.out.println("Taglia del prodotto:");
 							testoInput = readInputString("> ");
 							tagliaAbbigliamento = testoInput;
@@ -469,8 +465,8 @@ public class MainProgettoEcommerce {
 		scanner.close();
 	}
 
-	// Prende in input una stringa
-	@SuppressWarnings("resource") // Note: Per rimuovere quell'errore noioso dell'oggetto scanner.
+	// Prende in input una stringa:
+	@SuppressWarnings("resource") // Note: Per rimuovere l'errore dell'oggetto scanner.
 	public static String readInputString(String preMessaggio){
 		if(preMessaggio != null){System.out.print(preMessaggio);}
 
@@ -478,13 +474,12 @@ public class MainProgettoEcommerce {
 		try{
 			return scanner.next();
 		}catch(Exception e){
-			// System.out.println("Errore nella lettura"); // Tanto non verrebbe mostrato a video dato dal pulisci schermo nel menu.
 			return null;
 		}
 	}
 
-	// Prende in unput un intero
-	@SuppressWarnings("resource") // Note: Per rimuovere quell'errore noioso dell'oggetto scanner.
+	// Prende in unput un intero:
+	@SuppressWarnings("resource") // Note: Per rimuovere l'errore dell'oggetto scanner.
 	public static int readInputInt(String preMessaggio){
 		if(preMessaggio != null){System.out.print(preMessaggio);}
 
@@ -492,11 +487,11 @@ public class MainProgettoEcommerce {
 		try{
 			return scanner.nextInt();
 		}catch(Exception e){
-			// System.out.println("Errore nella lettura"); // Tanto non verrebbe mostrato a video dato dal pulisci schermo nel menu.
 			return -1;
 		}
 	}
 
+	// Scrive la data e l'ora corrente in modo formattato:
 	public static void printTime(){
 		LocalDateTime adesso = LocalDateTime.now();
 		DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");

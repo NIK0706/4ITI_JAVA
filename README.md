@@ -1,2 +1,2 @@
 # 4ITI_JAVA
- Repository per il quarto anno (ITI) --> Uso di Java.
+ Repository, inverente a progetti e altro, per il quarto anno presso l'isistuto Calamandrei (FI).
