@@ -34,16 +34,22 @@ public class List {
 	// Questo implica che non siano presenti doppioni degli stessi oggetti aventi stesso ID.
 	public void addInIdOrder(Obj data){
 		Node newNode = new Node(data);
-		Node prima = head;
-		Node dopo = prima.getLink();
+		Node prevNode = head;
+		Node nextNode = prevNode.getLink();
 
-		while(prima.getDati().id < data.id && dopo.getDati().id < data.id){
-			prima = dopo;
-			dopo = prima.getLink();
+		// Ciclo che itera fino a quando non esce dalla lista, o quando il valore dell'ID del prossimo nodo presente nella lista è maggiore rispetto al nodo da aggiungere.
+		while(nextNode != null && nextNode.getDati().id < data.id){
+			prevNode = nextNode;
+			nextNode = prevNode.getLink();
 		}
-		prima.setLink(newNode);
-		newNode.setLink(dopo);
-		nElements++;
+		// Controllo se in caso di fuoriuscita dalla lista.
+		if(nextNode != null){
+			prevNode.setLink(newNode);
+			newNode.setLink(nextNode);
+			nElements++;
+		}else{
+			addInQueue(data);
+		}
 	}
 
 	public void delFromHead(){
