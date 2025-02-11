@@ -31,24 +31,28 @@ public class List {
 		}
 	}
 
-	// Questo implica che non siano presenti doppioni degli stessi oggetti aventi stesso ID.
 	public void addInIdOrder(Obj data){
-		Node newNode = new Node(data);
-		Node prevNode = head;
-		Node nextNode = prevNode.getLink();
+		if(head != null){
+			Node newNode = new Node(data);
+			Node curNode = head;
+			Node nextNode = curNode.getLink();
 
-		// Ciclo che itera fino a quando non esce dalla lista, o quando il valore dell'ID del prossimo nodo presente nella lista è maggiore rispetto al nodo da aggiungere.
-		while(nextNode != null && nextNode.getDati().id < data.id){
-			prevNode = nextNode;
-			nextNode = prevNode.getLink();
-		}
-		// Controllo se in caso di fuoriuscita dalla lista.
-		if(nextNode != null){
-			prevNode.setLink(newNode);
-			newNode.setLink(nextNode);
-			nElements++;
+			// In questo caso necessitiamo di metterlo in testa, quindi devo usare la funzione addInHead().
+			if(head.getDati().id > data.id){
+				addInHead(data);
+			}else{
+				// Ciclo che itera fino a quando non esce dalla lista, o quando il valore dell'ID del prossimo nodo presente nella lista è maggiore rispetto al nodo da aggiungere.
+				while(nextNode != null && nextNode.getDati().id < data.id){
+					curNode = nextNode;
+					nextNode = curNode.getLink();
+				}
+				curNode.setLink(newNode);
+				newNode.setLink(nextNode);
+				nElements++;
+			}
 		}else{
-			addInQueue(data);
+			// Qualora la lista fosse vuota usiamo la funzione addInHead().
+			addInHead(data);
 		}
 	}
 
@@ -56,6 +60,8 @@ public class List {
 		if(head != null){
 			head = head.getLink();
 			nElements--;
+		}else{
+			System.out.println("La lista è vuota.");
 		}
 	}
 
@@ -70,8 +76,42 @@ public class List {
 			curNode.setLink(null);
 			nElements--;
 		}else{
+			// Se abbiamo un solo elemento nella lista richiamiamo la funzione delFromHead(), visto che se passassimo dal ciclo, egli cercerebbe di trovare il prossimo elemento
+			// di null, il quale non esiste.
 			delFromHead();
 		}
+	}
+
+	// Qui controllo se gli attributi dentro gli oggetti sono uguali, se qualora volessi controllare l'uguaglianza degli oggetti stessi, indipendentemente dal loro contenuto
+	// avrei dovuto fare il seguente controllo: (Nodo.getDati() == data).
+	public void delFromOrder(Obj data){
+		if(head != null){
+			Node curNode = head;
+			Node nextNode = curNode.getLink();
+
+			// Se l'elemento si trova in testa bisogna chiamare la funzione delFromHead(), così si occupa lei del cambio head.
+			if((head.getDati().id == data.id) && head.getDati().name.equals(data.name)){
+				delFromHead();
+			}else{
+				// Cicliamo fino a quando non troviamo l'elemento da eliminare.
+				while(nextNode != null && (nextNode.getDati().id != data.id && !nextNode.getDati().name.equals(data.name))){
+					curNode = nextNode;
+					nextNode = curNode.getLink();
+				}
+				if(nextNode != null){
+					// In questo caso curNode indica l'elemento della lista posizionato prima rispetto quello da eliminare, cioè nextNode.
+					curNode.setLink(nextNode.getLink());
+					nElements--;
+				}else{
+					// Infine se scorriamo tutta la lista senza trovare occorrenze sia di nome che di ID informiamo, all'user, dell'esito.
+					System.out.println("L'elemento: Name: " + data.name + " | ID: " + data.id + " --> Non è stato trovato.");
+				}
+			}
+		}
+	}
+
+	public boolean isEmpty(){
+		return head == null;
 	}
 
 	public void printList(){
