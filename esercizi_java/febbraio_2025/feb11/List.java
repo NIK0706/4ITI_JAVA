@@ -31,6 +31,7 @@ public class List {
 		}
 	}
 
+	// Aggiungi in ordine rispettando la cardinalità definita dall'ID.
 	public void addInIdOrder(Obj data){
 		if(head != null){
 			Node newNode = new Node(data);
@@ -82,9 +83,10 @@ public class List {
 		}
 	}
 
-	// Qui controllo se gli attributi dentro gli oggetti sono uguali, se qualora volessi controllare l'uguaglianza degli oggetti stessi, indipendentemente dal loro contenuto
-	// avrei dovuto fare il seguente controllo: (Nodo.getDati() == data).
+	// Elimina l'elemento corrispondente al parametro in input.
 	public void delFromOrder(Obj data){
+		// In questo metodo controllo se gli attributi dentro gli oggetti sono uguali, se qualora volessi controllare l'uguaglianza degli oggetti stessi
+		// indipendentemente dal loro contenuto, avrei dovuto fare il seguente controllo: (Nodo.getDati() == data).
 		if(head != null){
 			Node curNode = head;
 			Node nextNode = curNode.getLink();

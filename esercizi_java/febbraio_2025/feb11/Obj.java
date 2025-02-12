@@ -3,7 +3,7 @@ package esercizi_java.febbraio_2025.feb11;
 public class Obj {
 	// Campi di esempio:
 	protected String name;
-	protected int id; // Unico valore che indica una regola di inserimento specifico della lista.
+	protected int id; // Unico valore che indica una regola di inserimento specifico nella lista.
 
 	public Obj(String name, int id){
 		this.name = name;
