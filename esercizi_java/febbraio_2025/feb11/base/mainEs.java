@@ -1,4 +1,4 @@
-package esercizi_java.febbraio_2025.feb11;
+package esercizi_java.febbraio_2025.feb11.base;
 
 public class mainEs {
 	public static void main(String[] args) {

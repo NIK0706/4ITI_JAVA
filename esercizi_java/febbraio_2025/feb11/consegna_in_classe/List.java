@@ -1,4 +1,4 @@
-package esercizi_java.febbraio_2025.feb11;
+package esercizi_java.febbraio_2025.feb11.consegna_in_classe;
 
 public class List {
 	private Node head;
@@ -9,14 +9,14 @@ public class List {
 		nElements = 0;
 	}
 
-	public void addInHead(Obj data){
+	public void addInHead(Planet data){
 		Node newNode = new Node(data);
 		newNode.setLink(head);
 		head = newNode;
 		nElements++;
 	}
 
-	public void addInQueue(Obj data){
+	public void addInQueue(Planet data){
 		if(head != null){
 			Node newNode = new Node(data);
 			Node curNode = head;
@@ -31,19 +31,19 @@ public class List {
 		}
 	}
 
-	// Aggiungi in ordine rispettando la cardinalità definita dall'ID.
-	public void addInIdOrder(Obj data){
+	// Aggiungi in ordine rispettando la cardinalità definita dal diametro (in modo decrescente).
+	public void addInDiameterOrder(Planet data){
 		if(head != null){
 			Node newNode = new Node(data);
 			Node curNode = head;
 			Node nextNode = curNode.getLink();
 
 			// In questo caso necessitiamo di metterlo in testa, quindi devo usare la funzione addInHead().
-			if(head.getDati().id > data.id){
+			if(head.getData().diameter < data.diameter){
 				addInHead(data);
 			}else{
-				// Ciclo che itera fino a quando non esce dalla lista, o quando il valore dell'ID del prossimo nodo presente nella lista è maggiore rispetto al nodo da aggiungere.
-				while(nextNode != null && nextNode.getDati().id < data.id){
+				// Ciclo che itera fino a quando non esce dalla lista, o quando il valore del diametro del prossimo nodo presente nella lista è minore rispetto al nodo da aggiungere.
+				while(nextNode != null && nextNode.getData().diameter > data.diameter){
 					curNode = nextNode;
 					nextNode = curNode.getLink();
 				}
@@ -84,19 +84,19 @@ public class List {
 	}
 
 	// Elimina l'elemento corrispondente al parametro in input.
-	public void delFromOrder(Obj data){
+	public void delFromOrder(Planet data){
 		// In questo metodo controllo se gli attributi dentro gli oggetti sono uguali, se qualora volessi controllare l'uguaglianza degli oggetti stessi
-		// indipendentemente dal loro contenuto, avrei dovuto fare il seguente controllo: (Nodo.getDati() == data).
+		// indipendentemente dal loro contenuto, avrei dovuto fare il seguente controllo: (Nodo.getData() == data).
 		if(head != null){
 			Node curNode = head;
 			Node nextNode = curNode.getLink();
 
 			// Se l'elemento si trova in testa bisogna chiamare la funzione delFromHead(), così si occupa lei del cambio head.
-			if((head.getDati().id == data.id) && head.getDati().name.equals(data.name)){
+			if((head.getData().diameter == data.diameter) && head.getData().name.equals(data.name)){
 				delFromHead();
 			}else{
 				// Cicliamo fino a quando non troviamo l'elemento da eliminare.
-				while(nextNode != null && (nextNode.getDati().id != data.id && !nextNode.getDati().name.equals(data.name))){
+				while(nextNode != null && (nextNode.getData().diameter != data.diameter && !nextNode.getData().name.equals(data.name))){
 					curNode = nextNode;
 					nextNode = curNode.getLink();
 				}
@@ -105,8 +105,8 @@ public class List {
 					curNode.setLink(nextNode.getLink());
 					nElements--;
 				}else{
-					// Infine se scorriamo tutta la lista senza trovare occorrenze sia di nome che di ID informiamo, all'user, dell'esito.
-					System.out.println("L'elemento: Name: " + data.name + " | ID: " + data.id + " --> Non è stato trovato.");
+					// Infine se scorriamo tutta la lista senza trovare occorrenze sia di nome che di diametro informiamo, all'user, dell'esito.
+					System.out.println("L'elemento: Name: " + data.name + " | Diameter: " + data.diameter + " --> Non è stato trovato.");
 				}
 			}
 		}
@@ -121,7 +121,7 @@ public class List {
 		if(head != null){
 			Node curNode = head;
 			while(curNode != null){
-				curNode.getDati().printObj();
+				curNode.getData().printPlanetInfo();
 				curNode = curNode.getLink();
 			}
 		}else{
