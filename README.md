@@ -1,5 +1,5 @@
 # 4ITI_JAVA
- Repository, inverente a progetti e altro, per il quarto anno presso l'isistuto Calamandrei (FI).
+ Repository, inerente a progetti e altro, per il quarto anno presso l'isistuto Calamandrei (FI).
 
  ## Progetti finiti:
  1. [**Halloween 2024**](progetti_java/progetto_halloween2024/).
