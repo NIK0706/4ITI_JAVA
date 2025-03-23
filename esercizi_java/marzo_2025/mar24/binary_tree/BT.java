@@ -27,13 +27,13 @@ public class BT{
 					curNode = curNode.getPdx();
 				}
 			}
-			System.out.println("newNode Value: " + data.getValue());
+			// System.out.println("newNode Value: " + data.getValue());
 			if(data.getValue() < prevNode.data.getValue()){
 				prevNode.setPsx(newNode);
-				System.out.println("prevNode Value: " + prevNode.data.getValue() + "\nLoc. Sinistra.");
+				// System.out.println("prevNode Value: " + prevNode.data.getValue() + "\nLoc. Sinistra.");
 			}else{
 				prevNode.setPdx(newNode);
-				System.out.println("prevNode Value: " + prevNode.data.getValue() + "\nLoc. Destra.");
+				// System.out.println("prevNode Value: " + prevNode.data.getValue() + "\nLoc. Destra.");
 			}
 
 		}
@@ -52,7 +52,24 @@ public class BT{
 		}
 	}
 
+	// Senza dover specificare la root.
 	public void visitaAnticipata(){
 		visitaAnticipata(root);
+	}
+
+	public boolean findNode(BTNode root, Obj data){
+		if(root == null){
+			return false;
+		}
+		if(root.data.getValue() == data.getValue()){
+			return true;
+		}
+		if(root.data.getValue() < data.getValue()){
+			return findNode(root.getPdx(), data);
+		}
+		if(root.data.getValue() > data.getValue()){
+			return findNode(root.getPsx(), data);
+		}
+		return false;
 	}
 }

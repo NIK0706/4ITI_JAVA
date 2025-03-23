@@ -18,5 +18,7 @@ public class BTMain{
 		System.out.println("---");
 
 		tree1.visitaAnticipata(tree1.root);
+
+		System.out.println(tree1.findNode(tree1.root, obj9));
 	}
 }

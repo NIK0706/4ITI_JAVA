@@ -2,7 +2,7 @@ package esercizi_java.marzo_2025.mar24;
 
 public class Obj{
 	protected String name;
-	protected int value;
+	protected int value; // Nel BT è l'attributo che scandisce la ricerca e l'inserimento.
 
 	public Obj(String name, int value){
 		this.name = name;
